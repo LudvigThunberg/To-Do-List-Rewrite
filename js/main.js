@@ -28,11 +28,11 @@ function createHtml() {
     let deleteToDoButton = document.createElement("button");
 
     // add classes
-    listParagraph.className = "list-paragraph-class";
     toDoDoneButton.className = "button-style";
     deleteToDoButton.className = "button-style";
 
     // add ids
+    listParagraph.id = "list-paragraph";
     toDoDoneButton.id = "task-done-button";
     deleteToDoButton.id = "delete-task-button";
 
@@ -58,6 +58,11 @@ function createHtml() {
   }
 }
 
-function taskDone(i) {}
+function taskDone(i) {
+  toDoArray[i].done = !toDoArray[i].done;
+  let listParagraphDone = document.getElementById("list-paragraph");
+  listParagraphDone.classList.toggle("to-do-done");
+  createHtml();
+}
 
 function handleDelete(i) {}
