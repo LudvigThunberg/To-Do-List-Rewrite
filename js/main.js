@@ -2,6 +2,7 @@ window.onload = function () {
   ul = document.getElementById("list-ul");
   createHtml();
   addNewToDo();
+  sortAfterImportant();
 };
 
 let ul;
@@ -10,11 +11,12 @@ class ToDoListTask {
   constructor(toDo) {
     this.toDo = toDo;
     this.done = false;
+    this.important = false;
   }
 }
 
-let toDo1 = new ToDoListTask("Äta", false);
-let toDo2 = new ToDoListTask("sova", false);
+let toDo1 = new ToDoListTask("Äta", false, false);
+let toDo2 = new ToDoListTask("sova", false, false);
 
 toDoArray = [toDo1, toDo2];
 
@@ -23,22 +25,31 @@ function createHtml() {
 
   for (let i = 0; i < toDoArray.length; i++) {
     toDoArray[i];
-    // create html elements
+
+    // Create html elements
     let listElement = document.createElement("li");
     let listParagraph = document.createElement("p");
+    let importantButton = document.createElement("button");
     let toDoDoneButton = document.createElement("button");
     let deleteToDoButton = document.createElement("button");
 
-    // add classes
+    // Add classes
+    importantButton.className = "button-style";
     toDoDoneButton.className = "button-style";
     deleteToDoButton.className = "button-style";
 
-    // add ids
+    // Add ids
     listParagraph.id = "list-paragraph";
+    importantButton.id = "important-button";
     toDoDoneButton.id = "task-done-button";
     deleteToDoButton.id = "delete-task-button";
 
-    // button functions
+    // Button functions
+
+    importantButton.addEventListener("click", () => {
+      toDoImportant(i);
+    });
+
     toDoDoneButton.addEventListener("click", () => {
       taskDone(i);
     });
@@ -47,20 +58,22 @@ function createHtml() {
       handleDelete(i);
     });
 
-    // add inner Html
+    // Add inner Html
     listParagraph.innerHTML = toDoArray[i].toDo;
+    importantButton.innerHTML = "Important";
     toDoDoneButton.innerHTML = "Done";
     deleteToDoButton.innerHTML = "Delete";
 
     // Print elements to dom
     ul.appendChild(listElement);
     listElement.appendChild(listParagraph);
+    listElement.appendChild(importantButton);
     listElement.appendChild(toDoDoneButton);
     listElement.appendChild(deleteToDoButton);
   }
 }
 
-//create new to do
+// Create new to do
 function addNewToDo() {
   let newToDoInput = document.getElementById("add-list-item-input");
   let newToDoButton = document.getElementById("add-list-item-input-button");
@@ -78,11 +91,26 @@ function taskDone(i) {
   toDoArray[i].done = !toDoArray[i].done;
   let listParagraphDone = document.getElementById("list-paragraph");
   listParagraphDone.classList.toggle("to-do-done");
-  createHtml();
 }
 
-//Delete to do
+// Delete to do
 function handleDelete(i) {
   toDoArray.splice(i, 1);
   createHtml();
+}
+
+// Important to do with sort
+function toDoImportant(i) {
+  toDoArray[i].important = !toDoArray[i].important;
+  console.log(toDoArray);
+}
+
+function sortAfterImportant() {
+  let sortButton = document.getElementById("sort-button");
+  sortButton.addEventListener("click", () => {
+    toDoArray.sort(function (x, y) {
+      return x.important === y.important ? 0 : x.important ? -1 : 1;
+    });
+    console.log(toDoArray);
+  });
 }
