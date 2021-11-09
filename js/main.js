@@ -2,7 +2,7 @@ window.onload = function () {
   ul = document.getElementById("list-ul");
   createHtml();
   addNewToDo();
-  sortAfterImportant();
+  sortAfterImportance();
 };
 
 let ul;
@@ -105,12 +105,12 @@ function toDoImportant(i) {
   console.log(toDoArray);
 }
 
-function sortAfterImportant() {
+function sortAfterImportance() {
   let sortButton = document.getElementById("sort-button");
   sortButton.addEventListener("click", () => {
     toDoArray.sort(function (x, y) {
       return x.important === y.important ? 0 : x.important ? -1 : 1;
     });
-    console.log(toDoArray);
+    createHtml();
   });
 }
