@@ -1,20 +1,22 @@
+window.onload = function () {
+  ul = document.getElementById("list-ul");
+  createHtml();
+  addNewToDo();
+};
+
+let ul;
+
 class ToDoListTask {
   constructor(toDo) {
     this.toDo = toDo;
     this.done = false;
   }
 }
-let ul;
 
 let toDo1 = new ToDoListTask("Äta", false);
 let toDo2 = new ToDoListTask("sova", false);
 
 toDoArray = [toDo1, toDo2];
-
-window.onload = function () {
-  ul = document.getElementById("list-ul");
-  createHtml();
-};
 
 function createHtml() {
   ul.innerHTML = "";
@@ -58,6 +60,20 @@ function createHtml() {
   }
 }
 
+//create new to do
+function addNewToDo() {
+  let newToDoInput = document.getElementById("add-list-item-input");
+  let newToDoButton = document.getElementById("add-list-item-input-button");
+
+  newToDoButton.addEventListener("click", () => {
+    let addValue = newToDoInput.value;
+    let addToDo = new ToDoListTask(addValue);
+    toDoArray.push(addToDo);
+    createHtml();
+  });
+}
+
+// Toggle to do done
 function taskDone(i) {
   toDoArray[i].done = !toDoArray[i].done;
   let listParagraphDone = document.getElementById("list-paragraph");
@@ -65,4 +81,8 @@ function taskDone(i) {
   createHtml();
 }
 
-function handleDelete(i) {}
+//Delete to do
+function handleDelete(i) {
+  toDoArray.splice(i, 1);
+  createHtml();
+}
