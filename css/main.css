@@ -1,5 +1,6 @@
 .button-style {
   height: 35px;
+  min-width: 40px;
   border: 1.5px solid black;
   border-radius: 5px;
   padding: 5px;
@@ -8,6 +9,9 @@
   transition: 0.1s;
   box-shadow: 1px 2px 1px gray;
   cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .button-style:hover {
   background-color: #9fb9b9;
@@ -15,6 +19,13 @@
 .button-style:active {
   transform: translateY(3px);
   box-shadow: 1px 0px 1px gray;
+}
+.button-style .fa {
+  font-size: 1.2rem;
+}
+
+.important {
+  background-color: #fc7676;
 }
 
 body {
@@ -100,4 +111,8 @@ body #to-do-container #list-container #list-container ul li p {
   margin-bottom: 0;
   margin-right: auto;
   font-weight: bold;
+}
+body #to-do-container #list-container #list-container ul li .to-do-done {
+  color: #ff9100;
+  text-decoration: line-through;
 }

@@ -4,6 +4,7 @@
 
 .button-style {
   height: 35px;
+  min-width: 40px;
   border: 1.5px solid black;
   border-radius: 5px;
   padding: 5px;
@@ -12,6 +13,9 @@
   transition: 0.1s;
   box-shadow: 1px 2px 1px gray;
   cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   &:hover {
     background-color: $button-color-hover;
   }
@@ -19,6 +23,12 @@
     transform: translateY(3px);
     box-shadow: 1px 0px 1px gray;
   }
+  .fa {
+    font-size: 1.2rem;
+  }
+}
+.important {
+  background-color: rgb(252, 118, 118);
 }
 
 // Tree styling
@@ -104,6 +114,10 @@ body {
               margin-bottom: 0;
               margin-right: auto;
               font-weight: bold;
+            }
+            .to-do-done {
+              color: rgb(255, 145, 0);
+              text-decoration: line-through;
             }
           }
         }

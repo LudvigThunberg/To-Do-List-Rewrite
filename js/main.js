@@ -28,13 +28,19 @@ function createHtml() {
     let listElement = document.createElement("li");
     let listParagraph = document.createElement("p");
     let importantButton = document.createElement("button");
+    let exclamationFa = document.createElement("i");
     let toDoDoneButton = document.createElement("button");
+    let checkFa = document.createElement("i");
     let deleteToDoButton = document.createElement("button");
+    let trashCanFa = document.createElement("i");
 
     // Add classes
     importantButton.className = "button-style";
     toDoDoneButton.className = "button-style";
     deleteToDoButton.className = "button-style";
+    exclamationFa.classList.add("fa", "fa-exclamation");
+    checkFa.classList.add("fa", "fa-check");
+    trashCanFa.classList.add("fa", "fa-trash-o");
 
     // Add ids
     listParagraph.id = "list-paragraph";
@@ -56,18 +62,27 @@ function createHtml() {
       handleDelete(i);
     });
 
+    //toggle booleans
+    if (toDoArray[i].done === true) {
+      listParagraph.classList.toggle("to-do-done");
+    }
+
+    if (toDoArray[i].important === true) {
+      importantButton.classList.toggle("important");
+    }
+
     // Add inner Html
-    listParagraph.innerHTML = toDoArray[i].toDo;
-    importantButton.innerHTML = "Important";
-    toDoDoneButton.innerHTML = "Done";
-    deleteToDoButton.innerHTML = "Delete";
+    listParagraph.innerHTML = "- " + toDoArray[i].toDo;
 
     // Print elements to dom
     ul.appendChild(listElement);
     listElement.appendChild(listParagraph);
     listElement.appendChild(importantButton);
+    importantButton.appendChild(exclamationFa);
     listElement.appendChild(toDoDoneButton);
+    toDoDoneButton.appendChild(checkFa);
     listElement.appendChild(deleteToDoButton);
+    deleteToDoButton.appendChild(trashCanFa);
   }
 }
 
@@ -97,9 +112,8 @@ function addNewToDo() {
 // Toggle to do done
 function taskDone(i) {
   toDoArray[i].done = !toDoArray[i].done;
-  let listParagraphDone = document.getElementById("list-paragraph");
-  listParagraphDone.classList.toggle("to-do-done");
   sendToLocalStorage();
+  createHtml();
 }
 
 // Delete to do
@@ -113,6 +127,7 @@ function handleDelete(i) {
 function toDoImportant(i) {
   toDoArray[i].important = !toDoArray[i].important;
   sendToLocalStorage();
+  createHtml();
 }
 
 function sortAfterImportance() {
