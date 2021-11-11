@@ -29,6 +29,15 @@
 }
 .important {
   background-color: rgb(252, 118, 118);
+  &:hover {
+    background-color: rgb(185, 90, 90);
+  }
+}
+.to-do-done-button {
+  background-color: rgb(255, 145, 0);
+  &:hover {
+    background-color: rgb(187, 106, 0);
+  }
 }
 
 // Tree styling
@@ -76,7 +85,7 @@ body {
         display: flex;
         gap: 5px;
         #add-list-item-input {
-          height: 30px;
+          height: 36px;
           border: 1px solid black;
           box-sizing: border-box;
           width: 100%;
@@ -90,6 +99,7 @@ body {
       }
       #list-container {
         width: 90%;
+
         ul {
           width: 100%;
           padding: 0;
@@ -108,6 +118,7 @@ body {
             border: 1px solid rgba(0, 0, 0, 0.315);
             border-radius: 5px;
             padding: 7px;
+            box-shadow: 1px 2px 1px gray;
             p {
               font-size: 1.2rem;
               margin-top: 0;
@@ -118,6 +129,8 @@ body {
             .to-do-done {
               color: rgb(255, 145, 0);
               text-decoration: line-through;
+              text-decoration-style: double;
+              text-decoration-thickness: 0.18rem;
             }
           }
         }

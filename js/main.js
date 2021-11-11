@@ -3,6 +3,7 @@ window.onload = function () {
   createHtml();
   addNewToDo();
   sortAfterImportance();
+  sortAlphabetically();
 };
 
 let ul;
@@ -25,6 +26,7 @@ function createHtml() {
     toDoArray[i];
 
     // Create html elements
+
     let listElement = document.createElement("li");
     let listParagraph = document.createElement("p");
     let importantButton = document.createElement("button");
@@ -35,6 +37,7 @@ function createHtml() {
     let trashCanFa = document.createElement("i");
 
     // Add classes
+
     importantButton.className = "button-style";
     toDoDoneButton.className = "button-style";
     deleteToDoButton.className = "button-style";
@@ -43,6 +46,7 @@ function createHtml() {
     trashCanFa.classList.add("fa", "fa-trash-o");
 
     // Add ids
+
     listParagraph.id = "list-paragraph";
     importantButton.id = "important-button";
     toDoDoneButton.id = "task-done-button";
@@ -63,8 +67,10 @@ function createHtml() {
     });
 
     //toggle booleans
+
     if (toDoArray[i].done === true) {
       listParagraph.classList.toggle("to-do-done");
+      toDoDoneButton.classList.toggle("to-do-done-button");
     }
 
     if (toDoArray[i].important === true) {
@@ -72,9 +78,11 @@ function createHtml() {
     }
 
     // Add inner Html
+
     listParagraph.innerHTML = "- " + toDoArray[i].toDo;
 
     // Print elements to dom
+
     ul.appendChild(listElement);
     listElement.appendChild(listParagraph);
     listElement.appendChild(importantButton);
@@ -87,6 +95,7 @@ function createHtml() {
 }
 
 // Create new to do
+
 function addNewToDo() {
   let newToDoInput = document.getElementById("add-list-item-input");
   let newToDoButton = document.getElementById("add-list-item-input-button");
@@ -110,6 +119,7 @@ function addNewToDo() {
 }
 
 // Toggle to do done
+
 function taskDone(i) {
   toDoArray[i].done = !toDoArray[i].done;
   sendToLocalStorage();
@@ -117,6 +127,7 @@ function taskDone(i) {
 }
 
 // Delete to do
+
 function handleDelete(i) {
   toDoArray.splice(i, 1);
   sendToLocalStorage();
@@ -124,6 +135,7 @@ function handleDelete(i) {
 }
 
 // Important to do with sort
+
 function toDoImportant(i) {
   toDoArray[i].important = !toDoArray[i].important;
   sendToLocalStorage();
@@ -141,7 +153,25 @@ function sortAfterImportance() {
   });
 }
 
-// Added local storage
+//sort Alphabetically
+
+function sortAlphabetically() {
+  let sortAlphabeticallyButton = document.getElementById("sort-a-ö");
+  sortAlphabeticallyButton.addEventListener("click", () => {
+    toDoArray.sort((a, b) => {
+      if (a.toDo.toLowerCase() > b.toDo.toLowerCase()) {
+        return 1;
+      } else {
+        return -1;
+      }
+    });
+    sendToLocalStorage();
+    createHtml();
+  });
+}
+
+// Local Storage
+
 function sendToLocalStorage() {
   let toDoArrayToLocalStorageJson = JSON.stringify(toDoArray);
   window.localStorage.setItem("toDoArray", toDoArrayToLocalStorageJson);
