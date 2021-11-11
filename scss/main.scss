@@ -1,0 +1,113 @@
+@import "_variables";
+
+//Global styleing
+
+.button-style {
+  height: 35px;
+  border: 1.5px solid black;
+  border-radius: 5px;
+  padding: 5px;
+  font-weight: bold;
+  background-color: $button-color;
+  transition: 0.1s;
+  box-shadow: 1px 2px 1px gray;
+  cursor: pointer;
+  &:hover {
+    background-color: $button-color-hover;
+  }
+  &:active {
+    transform: translateY(3px);
+    box-shadow: 1px 0px 1px gray;
+  }
+}
+
+// Tree styling
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(39, 39, 39);
+
+  #to-do-container {
+    min-height: 150px;
+    background-color: rgb(255, 234, 214);
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 5px;
+    padding-bottom: 30px;
+    box-shadow: 0 0 0 10px rgba(255, 238, 0, 0.281),
+      0 0 0 20px rgba(255, 251, 0, 0.623), 0 0 0 30px rgba(255, 153, 0, 0.637),
+      0 0 0 40px rgba(255, 115, 0, 0.637);
+
+    header {
+      width: 90%;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 5px;
+      h2 {
+        margin-right: auto;
+        text-decoration: underline;
+      }
+    }
+    #list-container {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      #input-list-item-container {
+        width: 90%;
+        display: flex;
+        gap: 5px;
+        #add-list-item-input {
+          height: 30px;
+          border: 1px solid black;
+          box-sizing: border-box;
+          width: 100%;
+          border-radius: 5px;
+          box-shadow: 1px 2px 1px gray;
+          padding: 12px;
+          &:focus {
+            outline: none;
+          }
+        }
+      }
+      #list-container {
+        width: 90%;
+        ul {
+          width: 100%;
+          padding: 0;
+          display: flex;
+          flex-direction: column;
+          gap: 5px;
+          li {
+            background-color: white;
+            margin: 0;
+            box-sizing: border-box;
+            width: 100%;
+            display: flex;
+            justify-content: flex-end;
+            gap: 7px;
+            align-items: center;
+            border: 1px solid rgba(0, 0, 0, 0.315);
+            border-radius: 5px;
+            padding: 7px;
+            p {
+              font-size: 1.2rem;
+              margin-top: 0;
+              margin-bottom: 0;
+              margin-right: auto;
+              font-weight: bold;
+            }
+          }
+        }
+      }
+    }
+  }
+}
