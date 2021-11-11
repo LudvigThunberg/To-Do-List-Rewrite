@@ -15,12 +15,10 @@ class ToDoListTask {
   }
 }
 
-let toDo1 = new ToDoListTask("Äta", false, false);
-let toDo2 = new ToDoListTask("sova", false, false);
-
-toDoArray = [toDo1, toDo2];
+toDoArray = [];
 
 function createHtml() {
+  getFromLocalStorage();
   ul.innerHTML = "";
 
   for (let i = 0; i < toDoArray.length; i++) {
@@ -77,12 +75,22 @@ function createHtml() {
 function addNewToDo() {
   let newToDoInput = document.getElementById("add-list-item-input");
   let newToDoButton = document.getElementById("add-list-item-input-button");
+  newToDoInput.addEventListener("keyup", function (e) {
+    if (e.code === "Enter") {
+      newToDoButton.click();
+    }
+  });
 
   newToDoButton.addEventListener("click", () => {
-    let addValue = newToDoInput.value;
-    let addToDo = new ToDoListTask(addValue);
-    toDoArray.push(addToDo);
-    createHtml();
+    if (document.getElementById("add-list-item-input").value.length == 0) {
+    } else {
+      let addValue = newToDoInput.value;
+      let addToDo = new ToDoListTask(addValue);
+      toDoArray.push(addToDo);
+      sendToLocalStorage();
+      newToDoInput.value = "";
+      createHtml();
+    }
   });
 }
 
@@ -91,11 +99,13 @@ function taskDone(i) {
   toDoArray[i].done = !toDoArray[i].done;
   let listParagraphDone = document.getElementById("list-paragraph");
   listParagraphDone.classList.toggle("to-do-done");
+  sendToLocalStorage();
 }
 
 // Delete to do
 function handleDelete(i) {
   toDoArray.splice(i, 1);
+  sendToLocalStorage();
   createHtml();
 }
 
@@ -103,14 +113,32 @@ function handleDelete(i) {
 function toDoImportant(i) {
   toDoArray[i].important = !toDoArray[i].important;
   console.log(toDoArray);
+  sendToLocalStorage();
 }
 
 function sortAfterImportance() {
   let sortButton = document.getElementById("sort-button");
   sortButton.addEventListener("click", () => {
-    toDoArray.sort(function (x, y) {
-      return x.important === y.important ? 0 : x.important ? -1 : 1;
+    toDoArray.sort(function (a, b) {
+      return b.important - a.important;
     });
+    sendToLocalStorage();
     createHtml();
   });
+}
+
+// Added local storage
+function sendToLocalStorage() {
+  let toDoArrayToLocalStorageJson = JSON.stringify(toDoArray);
+  window.localStorage.setItem("toDoArray", toDoArrayToLocalStorageJson);
+  console.log(toDoArray);
+}
+
+function getFromLocalStorage() {
+  let toDoArrayFromLocalStorageJson = window.localStorage.getItem("toDoArray");
+  if (!toDoArrayFromLocalStorageJson) {
+    sendToLocalStorage();
+  } else {
+    toDoArray = JSON.parse(toDoArrayFromLocalStorageJson);
+  }
 }
