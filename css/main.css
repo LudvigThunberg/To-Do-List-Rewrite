@@ -117,6 +117,7 @@ body #to-do-container #list-container #list-container ul li {
   box-shadow: 1px 2px 1px gray;
 }
 body #to-do-container #list-container #list-container ul li p {
+  padding-left: 30px;
   font-size: 1.2rem;
   margin-top: 0;
   margin-bottom: 0;

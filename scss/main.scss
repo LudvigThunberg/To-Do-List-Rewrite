@@ -120,12 +120,14 @@ body {
             padding: 7px;
             box-shadow: 1px 2px 1px gray;
             p {
+              padding-left: 30px;
               font-size: 1.2rem;
               margin-top: 0;
               margin-bottom: 0;
               margin-right: auto;
               font-weight: bold;
             }
+
             .to-do-done {
               color: rgb(255, 145, 0);
               text-decoration: line-through;
