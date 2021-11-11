@@ -112,7 +112,6 @@ function handleDelete(i) {
 // Important to do with sort
 function toDoImportant(i) {
   toDoArray[i].important = !toDoArray[i].important;
-  console.log(toDoArray);
   sendToLocalStorage();
 }
 
@@ -131,7 +130,6 @@ function sortAfterImportance() {
 function sendToLocalStorage() {
   let toDoArrayToLocalStorageJson = JSON.stringify(toDoArray);
   window.localStorage.setItem("toDoArray", toDoArrayToLocalStorageJson);
-  console.log(toDoArray);
 }
 
 function getFromLocalStorage() {
