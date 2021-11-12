@@ -106,6 +106,7 @@ function addNewToDo() {
   });
 
   newToDoButton.addEventListener("click", () => {
+    event.preventDefault();
     if (document.getElementById("add-list-item-input").value.length == 0) {
     } else {
       let addValue = newToDoInput.value;
