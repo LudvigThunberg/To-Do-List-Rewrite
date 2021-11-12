@@ -1,5 +1,6 @@
 window.onload = function () {
   ul = document.getElementById("list-ul");
+  document.getElementById("add-list-item-input").focus();
   createHtml();
   addNewToDo();
   sortAfterImportance();
